@@ -24,7 +24,6 @@ class InfoHotelListView: UITableView, UITableViewDelegate, UITableViewDataSource
         isScrollEnabled = false
         
         register(InfoButtonCell.self, forCellReuseIdentifier: "Cell")
-        reloadData()
     }
     
     required init?(coder: NSCoder) {

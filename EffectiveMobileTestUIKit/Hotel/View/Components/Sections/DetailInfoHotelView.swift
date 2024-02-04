@@ -57,7 +57,7 @@ class DetailInfoHotelView: UIView {
             infoHotelList.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
             infoHotelList.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             infoHotelList.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            infoHotelList.heightAnchor.constraint(equalTo: infoHotelList.widthAnchor, multiplier: 0.497),
+            infoHotelList.heightAnchor.constraint(equalToConstant: 179),
             infoHotelList.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
     }

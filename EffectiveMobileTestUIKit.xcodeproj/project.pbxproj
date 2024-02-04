@@ -28,6 +28,8 @@
 		8D5889D02B6CF3430009C912 /* MainInfoHotelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5889CF2B6CF3430009C912 /* MainInfoHotelView.swift */; };
 		8DED49962B6D239C00EF7743 /* DetailInfoHotelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DED49952B6D239C00EF7743 /* DetailInfoHotelView.swift */; };
 		8DED49982B6EC31000EF7743 /* UIView+CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DED49972B6EC31000EF7743 /* UIView+CornerRadius.swift */; };
+		8DED499C2B6ED36400EF7743 /* HotelRoomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DED499B2B6ED36400EF7743 /* HotelRoomCell.swift */; };
+		8DED499E2B6ED92600EF7743 /* HotelRoomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DED499D2B6ED92600EF7743 /* HotelRoomsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,8 @@
 		8D5889CF2B6CF3430009C912 /* MainInfoHotelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInfoHotelView.swift; sourceTree = "<group>"; };
 		8DED49952B6D239C00EF7743 /* DetailInfoHotelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoHotelView.swift; sourceTree = "<group>"; };
 		8DED49972B6EC31000EF7743 /* UIView+CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CornerRadius.swift"; sourceTree = "<group>"; };
+		8DED499B2B6ED36400EF7743 /* HotelRoomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelRoomCell.swift; sourceTree = "<group>"; };
+		8DED499D2B6ED92600EF7743 /* HotelRoomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelRoomsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,8 +143,7 @@
 		8D5889982B6BBB080009C912 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8D5889CE2B6CF3260009C912 /* Sections */,
-				8D5889C92B6C32920009C912 /* InfoHotelList */,
+				8DED499A2B6ED22F00EF7743 /* Components */,
 				8D5889832B6B995A0009C912 /* HotelViewController.swift */,
 			);
 			path = View;
@@ -173,7 +176,9 @@
 		8D58899C2B6BBB400009C912 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8D5889C52B6C2B970009C912 /* HotelDetailButton.swift */,
+				8DED49992B6ED21E00EF7743 /* Components */,
+				8DED499B2B6ED36400EF7743 /* HotelRoomCell.swift */,
+				8DED499D2B6ED92600EF7743 /* HotelRoomsViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -304,6 +309,23 @@
 			path = Sections;
 			sourceTree = "<group>";
 		};
+		8DED49992B6ED21E00EF7743 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8D5889C52B6C2B970009C912 /* HotelDetailButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		8DED499A2B6ED22F00EF7743 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8D5889CE2B6CF3260009C912 /* Sections */,
+				8D5889C92B6C32920009C912 /* InfoHotelList */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -381,6 +403,7 @@
 				8DED49962B6D239C00EF7743 /* DetailInfoHotelView.swift in Sources */,
 				8D5889C82B6C302C0009C912 /* InfoHotelListView.swift in Sources */,
 				8D5889BD2B6BD3340009C912 /* ImageCell.swift in Sources */,
+				8DED499C2B6ED36400EF7743 /* HotelRoomCell.swift in Sources */,
 				8D5889A82B6BBE8A0009C912 /* UIColor+Colors.swift in Sources */,
 				8D5889802B6B995A0009C912 /* AppDelegate.swift in Sources */,
 				8D5889AC2B6BC1450009C912 /* UITextField+Publisher.swift in Sources */,
@@ -390,6 +413,7 @@
 				8D5889822B6B995A0009C912 /* SceneDelegate.swift in Sources */,
 				8DED49982B6EC31000EF7743 /* UIView+CornerRadius.swift in Sources */,
 				8D5889B22B6BC24A0009C912 /* BookingModel.swift in Sources */,
+				8DED499E2B6ED92600EF7743 /* HotelRoomsViewController.swift in Sources */,
 				8D5889D02B6CF3430009C912 /* MainInfoHotelView.swift in Sources */,
 				8D5889C42B6BEC540009C912 /* TagView.swift in Sources */,
 				8D5889CB2B6C33010009C912 /* InfoButtonCell.swift in Sources */,

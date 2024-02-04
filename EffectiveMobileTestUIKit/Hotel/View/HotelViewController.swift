@@ -18,6 +18,13 @@ class HotelViewController: UIViewController {
     
     let mainInfoSection = MainInfoHotelView()
     let detailInfoSection = DetailInfoHotelView()
+    
+    let divider: UIView = {
+        let uiView = UIView()
+        uiView.backgroundColor = .lightGray.withAlphaComponent(0.5)
+        return uiView
+    }()
+    
     let blueNextButton = BlueNextButtonView(title: "К выбору номера")
     
     let containerView: UIView = {
@@ -42,8 +49,8 @@ class HotelViewController: UIViewController {
     private func customElement() {
         view.backgroundColor = .grayBackgroundColor
         scrollView.frame = view.bounds
-        
         title = "Отель"
+        
         navigationController?.navigationBar.backgroundColor = .white
         navigationController?.navigationBar.barTintColor = .white
     }
@@ -51,6 +58,7 @@ class HotelViewController: UIViewController {
     private func addSubviews() {
         view.addSubview(scrollView)
         scrollView.addSubview(containerView)
+        view.addSubview(divider)
         view.addSubview(blueNextButton)
         [mainInfoSection, detailInfoSection].forEach { containerView.addSubview($0) }
     }
@@ -60,13 +68,14 @@ class HotelViewController: UIViewController {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         mainInfoSection.translatesAutoresizingMaskIntoConstraints = false
         detailInfoSection.translatesAutoresizingMaskIntoConstraints = false
+        divider.translatesAutoresizingMaskIntoConstraints = false
         blueNextButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: blueNextButton.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: divider.topAnchor),
             
             containerView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
@@ -83,9 +92,14 @@ class HotelViewController: UIViewController {
             detailInfoSection.topAnchor.constraint(equalTo: mainInfoSection.bottomAnchor, constant: 8),
             detailInfoSection.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
             
-            blueNextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            blueNextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            blueNextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            divider.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            divider.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            divider.heightAnchor.constraint(equalToConstant: 1),
+            
+            blueNextButton.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 12),
+            blueNextButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
+            blueNextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            blueNextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
         ])
     }
 }

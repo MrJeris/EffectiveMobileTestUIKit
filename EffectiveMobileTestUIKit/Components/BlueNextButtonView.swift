@@ -18,6 +18,7 @@ class BlueNextButtonView: UIView {
         button.backgroundColor = .blueColor
         button.layer.cornerRadius = 15
         button.contentHorizontalAlignment = .center
+        button.isUserInteractionEnabled = true
         button.addTarget(self, action: #selector(buttonTap), for: .touchUpInside)
         return button
     }()
@@ -34,16 +35,17 @@ class BlueNextButtonView: UIView {
     
     @objc func buttonTap() {
         action?()
+        print("Click")
     }
     
     private func setupConstraints() {
         buttonView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            buttonView.topAnchor.constraint(equalTo: topAnchor, constant: 15),
-            buttonView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
+            buttonView.topAnchor.constraint(equalTo: topAnchor),
+            buttonView.bottomAnchor.constraint(equalTo: bottomAnchor),
             buttonView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            buttonView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            buttonView.trailingAnchor.constraint(equalTo: trailingAnchor),
             buttonView.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
