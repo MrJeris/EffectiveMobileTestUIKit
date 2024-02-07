@@ -18,7 +18,6 @@ class BlueNextButtonView: UIView {
         button.backgroundColor = .blueColor
         button.layer.cornerRadius = 15
         button.contentHorizontalAlignment = .center
-        button.isUserInteractionEnabled = true
         button.addTarget(self, action: #selector(buttonTap), for: .touchUpInside)
         return button
     }()

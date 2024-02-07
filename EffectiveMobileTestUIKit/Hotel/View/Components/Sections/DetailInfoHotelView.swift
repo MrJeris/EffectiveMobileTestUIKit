@@ -16,6 +16,8 @@ class DetailInfoHotelView: UIView {
         return label
     }()
     
+    let tagListView = TagListView()
+    
     let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
@@ -35,7 +37,7 @@ class DetailInfoHotelView: UIView {
         backgroundColor = .white
         infoHotelList.layer.cornerRadius = 15
         
-        [aboutHotelLabel, descriptionLabel, infoHotelList].forEach { addSubview($0) }
+        [aboutHotelLabel, tagListView, descriptionLabel, infoHotelList].forEach { addSubview($0) }
         
         setupConstraints()
     }
@@ -43,6 +45,7 @@ class DetailInfoHotelView: UIView {
     private func setupConstraints() {
         aboutHotelLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        tagListView.translatesAutoresizingMaskIntoConstraints = false
         infoHotelList.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -50,7 +53,11 @@ class DetailInfoHotelView: UIView {
             aboutHotelLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             aboutHotelLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             
-            descriptionLabel.topAnchor.constraint(equalTo: aboutHotelLabel.bottomAnchor, constant: 16),
+            tagListView.topAnchor.constraint(equalTo: aboutHotelLabel.bottomAnchor, constant: 16),
+            tagListView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            tagListView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            
+            descriptionLabel.topAnchor.constraint(equalTo: tagListView.bottomAnchor, constant: 12),
             descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             
@@ -75,5 +82,6 @@ class DetailInfoHotelView: UIView {
 #Preview {
     let view = DetailInfoHotelView()
     view.backgroundColor = .cyan
+    view.tagListView.configure(for: ["3-я линия", "Платный Wi-Fi в фойе", "30 км до аэропорта", "1 км до пляжа"])
     return view
 }

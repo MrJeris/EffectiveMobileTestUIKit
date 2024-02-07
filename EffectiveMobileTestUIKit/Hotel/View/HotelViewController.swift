@@ -10,6 +10,8 @@ import SwiftUI
 
 class HotelViewController: UIViewController {
     
+    var coordinator: HotelCoordinator?
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -104,9 +106,11 @@ class HotelViewController: UIViewController {
     }
 }
 
-struct HotelView: UIViewControllerRepresentable {
+private struct HotelView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
-        HotelViewController()
+        let view = HotelViewController()
+        view.detailInfoSection.tagListView.configure(for: ["3-я линия", "Платный Wi-Fi в фойе", "30 км до аэропорта", "1 км до пляжа"])
+        return view
     }
     
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
