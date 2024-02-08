@@ -15,7 +15,7 @@ class AppCoordinator {
     }
     
     func start() {
-        let userListCoordinator = HotelCoordinator(navigationController: navigationController)
-        userListCoordinator.start()
+        let hotelCoordinator = HotelCoordinator(navigationController: navigationController)
+        hotelCoordinator.start()
     }
 }
