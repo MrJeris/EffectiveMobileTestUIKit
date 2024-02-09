@@ -15,6 +15,8 @@ class HotelBookingViewModel: ObservableObject {
     private let networkingService: NetworkServiceImpl
     private var cancellables = Set<AnyCancellable>()
     
+    @Published var tourists: [Tourist] = [Tourist(id: 0)]
+    
     @Published var hotelBooking: BookingModel = BookingModel(id: 1,
                                                              hotelName: "",
                                                              hotelAdress: "",
@@ -54,5 +56,9 @@ class HotelBookingViewModel: ObservableObject {
                 self?.hotelBooking = hotelBooking
             }
             .store(in: &cancellables)
+    }
+    
+    func addTourist() {
+        tourists.append(Tourist(id: tourists.count))
     }
 }

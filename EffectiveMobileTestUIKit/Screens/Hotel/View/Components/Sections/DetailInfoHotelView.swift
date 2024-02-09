@@ -46,6 +46,9 @@ class DetailInfoHotelView: UIView {
     
     private func setupSubviews() {
         backgroundColor = .white
+        
+        layer.cornerRadius = 12
+        
         infoHotelList.layer.cornerRadius = 15
         [aboutHotelLabel, tagListView, descriptionLabel, infoHotelList].forEach { addSubview($0) }
     }

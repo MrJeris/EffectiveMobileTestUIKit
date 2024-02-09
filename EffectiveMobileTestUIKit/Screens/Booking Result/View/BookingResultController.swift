@@ -98,7 +98,7 @@ class BookingResultController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 122),
+            imageView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 122),
             imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             imageView.heightAnchor.constraint(equalToConstant: 94),
             imageView.widthAnchor.constraint(equalToConstant: 94),
@@ -111,12 +111,13 @@ class BookingResultController: UIViewController {
             confirmationProcessingInformationLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             confirmationProcessingInformationLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
-            divider.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -16),
+
             divider.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             divider.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             divider.heightAnchor.constraint(equalToConstant: 1),
             
-            button.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            button.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 12),
+            button.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
             button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])

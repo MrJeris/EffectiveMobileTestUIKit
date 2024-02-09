@@ -55,12 +55,6 @@ class HotelViewController: UIViewController {
         bindViewModel()
     }
     
-    override func viewDidLayoutSubviews() {
-        mainInfoSection.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 12)
-        detailInfoSection.layer.cornerRadius = 12
-    }
-    
-    
     // MARK: - Setup Methods
     
     private func setupSubviews() {
@@ -133,7 +127,6 @@ class HotelViewController: UIViewController {
         viewModel?.$hotel
             .sink { [weak self] hotel in
                 DispatchQueue.main.async {
-                    // Update UI based on ViewModel data
                     self?.updateMainInfoSection(with: hotel)
                     self?.updateDetailInfoSection(with: hotel)
                 }
@@ -145,7 +138,7 @@ class HotelViewController: UIViewController {
         mainInfoSection.ratingView.ratingLabel.text = "\(hotel.rating) \(hotel.ratingName)"
         mainInfoSection.hotelName.text = hotel.name
         mainInfoSection.hotelAddresButton.setTitle(hotel.adress, for: .normal)
-        mainInfoSection.priceLabel.text = "от \(hotel.minimalPrice) Р"
+        mainInfoSection.priceLabel.text = "от \(hotel.minimalPrice.rubFormat)"
         mainInfoSection.priceForItLabel.text = hotel.priceForIt
     }
     

@@ -56,12 +56,12 @@ class CustomTextFieldView: UIView, UITextFieldDelegate {
         
         NSLayoutConstraint.activate([
             textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            textField.trailingAnchor.constraint(equalTo: trailingAnchor),
+            textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             textFieldYAnchorConstraint,
-            textField.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             
             placeholderLeadingAnchor,
             placeholderYAnchorConstraint,
+            placeholder.trailingAnchor.constraint(equalTo: textField.trailingAnchor),
             
             heightAnchor.constraint(equalToConstant: 52)
         ])
@@ -73,7 +73,7 @@ class CustomTextFieldView: UIView, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         placeholderYAnchorConstraint.constant = -18
-        placeholderLeadingAnchor.constant = -placeholder.frame.width * 0.15
+        placeholderLeadingAnchor.constant = -placeholder.frame.width * 0.15 - 8
         textFieldYAnchorConstraint.constant = 6
         performAnimation(transform: CGAffineTransform(scaleX: 0.7, y: 0.7))
     }

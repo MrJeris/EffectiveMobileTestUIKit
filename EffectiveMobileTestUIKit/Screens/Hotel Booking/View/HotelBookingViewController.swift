@@ -27,8 +27,14 @@ class HotelBookingViewController: UIViewController {
     let ratingAndNameHotelView = RatingNameHotelView()
     let bookingDetailsView = BookingDetailsView()
     let infoAboutBuyerView = InformationAboutBuyerView()
-    let firstTouristInformationView = TouristInformationView(touristNumber: "Первый турист")
-    let secondTouristInformationView = TouristInformationView(touristNumber: "Второй турист")
+    
+    let touristsListStack: UIStackView = {
+        let vStack = UIStackView()
+        vStack.axis = .vertical
+        vStack.spacing = 8
+        vStack.distribution = .fill
+        return vStack
+    }()
     
     private let addTouristLabel: UILabel = {
         let label = UILabel()
@@ -46,6 +52,7 @@ class HotelBookingViewController: UIViewController {
         button.tintColor = .white
         button.backgroundColor = .blueColor
         button.layer.cornerRadius = 6
+        button.addTarget(self, action: #selector(addTourist), for: .touchUpInside)
         return button
     }()
     
@@ -69,7 +76,7 @@ class HotelBookingViewController: UIViewController {
         return uiView
     }()
     
-    let blueNextButton = BlueNextButtonView(title: "Оплатить 198 036 Р")
+    let blueNextButton = BlueNextButtonView(title: "")
     
     private let containerView: UIView = {
         let containerView = UIView()
@@ -90,15 +97,12 @@ class HotelBookingViewController: UIViewController {
         bindViewModel()
     }
     
-    
     // MARK: - Private Methods
     
     private func setupSubviews() {
         view.backgroundColor = .grayBackgroundColor
         scrollView.frame = view.bounds
         title = "Бронирование"
-        
-        secondTouristInformationView.isVStackVisible = false
         
         navigationController?.navigationBar.backgroundColor = .white
         navigationController?.navigationBar.barTintColor = .white
@@ -114,7 +118,7 @@ class HotelBookingViewController: UIViewController {
         view.addSubview(divider)
         view.addSubview(blueNextButton)
         [addTouristLabel, addTouristButton].forEach { addTouristView.addArrangedSubview($0) }
-        [ratingAndNameHotelView, bookingDetailsView, infoAboutBuyerView, firstTouristInformationView, secondTouristInformationView, addTouristView, paymentDetailsView].forEach { containerView.addSubview($0) }
+        [ratingAndNameHotelView, bookingDetailsView, infoAboutBuyerView, touristsListStack, addTouristView, paymentDetailsView].forEach { containerView.addSubview($0) }
     }
     
     private func setupConstraints() {
@@ -123,8 +127,7 @@ class HotelBookingViewController: UIViewController {
         ratingAndNameHotelView.translatesAutoresizingMaskIntoConstraints = false
         bookingDetailsView.translatesAutoresizingMaskIntoConstraints = false
         infoAboutBuyerView.translatesAutoresizingMaskIntoConstraints = false
-        firstTouristInformationView.translatesAutoresizingMaskIntoConstraints = false
-        secondTouristInformationView.translatesAutoresizingMaskIntoConstraints = false
+        touristsListStack.translatesAutoresizingMaskIntoConstraints = false
         addTouristView.translatesAutoresizingMaskIntoConstraints = false
         paymentDetailsView.translatesAutoresizingMaskIntoConstraints = false
         divider.translatesAutoresizingMaskIntoConstraints = false
@@ -154,17 +157,14 @@ class HotelBookingViewController: UIViewController {
             infoAboutBuyerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             infoAboutBuyerView.topAnchor.constraint(equalTo: bookingDetailsView.bottomAnchor, constant: 8),
             
-            firstTouristInformationView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            firstTouristInformationView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            firstTouristInformationView.topAnchor.constraint(equalTo: infoAboutBuyerView.bottomAnchor, constant: 8),
-            
-            secondTouristInformationView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            secondTouristInformationView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            secondTouristInformationView.topAnchor.constraint(equalTo: firstTouristInformationView.bottomAnchor, constant: 8),
+            touristsListStack.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            touristsListStack.topAnchor.constraint(equalTo: infoAboutBuyerView.bottomAnchor, constant: 8),
+            touristsListStack.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            touristsListStack.bottomAnchor.constraint(equalTo: addTouristView.topAnchor, constant: -8),
             
             addTouristView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             addTouristView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            addTouristView.topAnchor.constraint(equalTo: secondTouristInformationView.bottomAnchor, constant: 8),
+            addTouristView.topAnchor.constraint(equalTo: touristsListStack.bottomAnchor, constant: 8),
             addTouristButton.widthAnchor.constraint(equalToConstant: 32),
             addTouristButton.heightAnchor.constraint(equalToConstant: 32),
             
@@ -186,12 +186,29 @@ class HotelBookingViewController: UIViewController {
     
     // MARK: - Private Methods
     
+    private func updateTouristList(tourists: [Tourist]) {
+        touristsListStack.subviews.forEach { $0.removeFromSuperview() }
+        
+        tourists.forEach {
+            touristsListStack.addArrangedSubview(TouristInformationView(touristNumber: "\(($0.id + 1).russianOrdinal()) турист", isHidden: $0.id == 0 ? false : true))
+        }
+    }
+    
     private func bindViewModel() {
         viewModel?.$hotelBooking
             .sink { [weak self] hotelBooking in
                 DispatchQueue.main.async {
                     // Обновление интерфейса на основе данных из ViewModel
                     self?.updateUI(with: hotelBooking)
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel?.$tourists
+            .sink { [weak self] tourists in
+                DispatchQueue.main.async {
+                    // Обновление интерфейса на основе данных из ViewModel
+                    self?.updateTouristList(tourists: tourists)
                 }
             }
             .store(in: &cancellables)
@@ -210,10 +227,16 @@ class HotelBookingViewController: UIViewController {
         bookingDetailsView.room.rightLabel.text = hotelBooking.room
         bookingDetailsView.nutrition.rightLabel.text = hotelBooking.nutrition
         
-        paymentDetailsView.tourPrice.rightLabel.text = "\(hotelBooking.tourPrice) P"
-        paymentDetailsView.fuelCharge.rightLabel.text = "\(hotelBooking.fuelCharge) P"
-        paymentDetailsView.serviceCharge.rightLabel.text = "\(hotelBooking.serviceCharge) P"
-        paymentDetailsView.totalPrice.rightLabel.text = "\(hotelBooking.tourPrice + hotelBooking.fuelCharge + hotelBooking.serviceCharge) P"
+        paymentDetailsView.tourPrice.rightLabel.text = hotelBooking.tourPrice.rubFormat
+        paymentDetailsView.fuelCharge.rightLabel.text = hotelBooking.fuelCharge.rubFormat
+        paymentDetailsView.serviceCharge.rightLabel.text = hotelBooking.serviceCharge.rubFormat
+        paymentDetailsView.totalPrice.rightLabel.text = (hotelBooking.tourPrice + hotelBooking.fuelCharge + hotelBooking.serviceCharge).rubFormat
+        
+        blueNextButton.buttonView.setTitle("Оплатить \((hotelBooking.tourPrice + hotelBooking.fuelCharge + hotelBooking.serviceCharge).rubFormat)", for: .normal)
+    }
+    
+    @objc private func addTourist() {
+        viewModel?.addTourist()
     }
 }
 
@@ -221,22 +244,6 @@ private struct HotelBookingView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
         let view = HotelBookingViewController()
         view.viewModel = HotelBookingViewModel()
-//        view.ratingAndNameHotelView.ratingView.ratingLabel.text = "\(5) Превосходно"
-//        view.ratingAndNameHotelView.hotelName.text = "Steigenberger Makadi"
-//        view.ratingAndNameHotelView.hotelAddresButton.setTitle("Madinat Makadi, Safaga Road, Makadi Bay, Египет", for: .normal)
-//        
-//        view.bookingDetailsView.departure.rightLabel.text = "Санкт-Петербург"
-//        view.bookingDetailsView.arrivalCountry.rightLabel.text = "Египет, Хургада"
-//        view.bookingDetailsView.tourDateStartStop.rightLabel.text = "19.09.2023 – 27.09.2023"
-//        view.bookingDetailsView.numberOfNights.rightLabel.text = "7 ночей"
-//        view.bookingDetailsView.hotelName.rightLabel.text = "Steigenberger Makadi"
-//        view.bookingDetailsView.room.rightLabel.text = "Стандартный с видом на бассейн или сад"
-//        view.bookingDetailsView.nutrition.rightLabel.text = "Все включено"
-//        
-//        view.paymentDetailsView.tourPrice.rightLabel.text = "186 600 P"
-//        view.paymentDetailsView.fuelCharge.rightLabel.text = "9 300 P"
-//        view.paymentDetailsView.serviceCharge.rightLabel.text = "2 136 P"
-//        view.paymentDetailsView.totalPrice.rightLabel.text = "198 036 P"
         
         return view
     }

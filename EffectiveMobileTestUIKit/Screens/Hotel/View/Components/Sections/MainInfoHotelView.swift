@@ -34,7 +34,6 @@ class MainInfoHotelView: UIView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
         label.textColor = .blackColor
-        label.text = "от 134 673 P"
         return label
     }()
     
@@ -42,7 +41,6 @@ class MainInfoHotelView: UIView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .grayColor
-        label.text = "за тур с перелётом"
         return label
     }()
     
@@ -51,7 +49,6 @@ class MainInfoHotelView: UIView {
         hStack.axis = .horizontal
         hStack.spacing = 8
         hStack.alignment = .lastBaseline
-        hStack.distribution = .fill
         return hStack
     }()
     
@@ -62,6 +59,11 @@ class MainInfoHotelView: UIView {
         
         setupSubviews()
         setupConstraints()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        roundCorners(corners: [.bottomLeft, .bottomRight], radius: 12)
     }
     
     // MARK: - Private Methods

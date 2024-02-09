@@ -150,7 +150,6 @@ class HotelRoomCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         layer.cornerRadius = 12
     }
     
@@ -158,7 +157,7 @@ class HotelRoomCell: UICollectionViewCell {
     
     func configure(with room: Room) {
         hotelName.text = room.name
-        priceLabel.text = "\(room.price) Р"
+        priceLabel.text = room.price.rubFormat
         priceForItLabel.text = room.pricePer
         
         tagListView.configure(for: room.peculiarities, isLastTagButton: true)

@@ -54,6 +54,8 @@
 		8DED49D42B7525A300EF7743 /* NetworkingServiceHotelSuccessMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DED49D32B7525A300EF7743 /* NetworkingServiceHotelSuccessMock.swift */; };
 		8DED49D62B75278700EF7743 /* NetworkingServiceHotelRoomSuccessMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DED49D52B75278700EF7743 /* NetworkingServiceHotelRoomSuccessMock.swift */; };
 		8DED49D82B7527F100EF7743 /* NetworkingServiceHotelBookingSuccessMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DED49D72B7527F100EF7743 /* NetworkingServiceHotelBookingSuccessMock.swift */; };
+		8DED49DA2B757B9800EF7743 /* TouristModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DED49D92B757B9800EF7743 /* TouristModel.swift */; };
+		8DED49DC2B757FE500EF7743 /* Int+WordConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DED49DB2B757FE500EF7743 /* Int+WordConverter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +108,8 @@
 		8DED49D32B7525A300EF7743 /* NetworkingServiceHotelSuccessMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingServiceHotelSuccessMock.swift; sourceTree = "<group>"; };
 		8DED49D52B75278700EF7743 /* NetworkingServiceHotelRoomSuccessMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingServiceHotelRoomSuccessMock.swift; sourceTree = "<group>"; };
 		8DED49D72B7527F100EF7743 /* NetworkingServiceHotelBookingSuccessMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingServiceHotelBookingSuccessMock.swift; sourceTree = "<group>"; };
+		8DED49D92B757B9800EF7743 /* TouristModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouristModel.swift; sourceTree = "<group>"; };
+		8DED49DB2B757FE500EF7743 /* Int+WordConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+WordConverter.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				8D5889B12B6BC24A0009C912 /* BookingModel.swift */,
+				8DED49D92B757B9800EF7743 /* TouristModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -309,6 +314,7 @@
 				8D5889A72B6BBE8A0009C912 /* UIColor+Colors.swift */,
 				8D5889AB2B6BC1450009C912 /* UITextField+Publisher.swift */,
 				8DED49972B6EC31000EF7743 /* UIView+CornerRadius.swift */,
+				8DED49DB2B757FE500EF7743 /* Int+WordConverter.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -528,6 +534,7 @@
 				8DED49A02B703ABF00EF7743 /* StackView.swift in Sources */,
 				8DED49B12B71456F00EF7743 /* BookingResultController.swift in Sources */,
 				8D5889CD2B6C43040009C912 /* BlueNextButtonView.swift in Sources */,
+				8DED49DA2B757B9800EF7743 /* TouristModel.swift in Sources */,
 				8D5889C62B6C2B970009C912 /* HotelDetailButton.swift in Sources */,
 				8DED49CB2B740FD900EF7743 /* HotelBookingViewModel.swift in Sources */,
 				8D5889842B6B995A0009C912 /* HotelViewController.swift in Sources */,
@@ -555,6 +562,7 @@
 				8DED49C22B73BD3200EF7743 /* BookingResultCoordinator.swift in Sources */,
 				8DED49982B6EC31000EF7743 /* UIView+CornerRadius.swift in Sources */,
 				8DED49D12B7519CF00EF7743 /* Endpoint.swift in Sources */,
+				8DED49DC2B757FE500EF7743 /* Int+WordConverter.swift in Sources */,
 				8DED49BC2B73B9D100EF7743 /* HotelCoordinator.swift in Sources */,
 				8D5889B22B6BC24A0009C912 /* BookingModel.swift in Sources */,
 				8DED49D42B7525A300EF7743 /* NetworkingServiceHotelSuccessMock.swift in Sources */,

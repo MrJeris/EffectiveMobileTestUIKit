@@ -11,7 +11,7 @@ class TouristInformationView: UIView {
     
     // MARK: - Properties
     
-    var isVStackVisible = true
+    var vStackIsHidden = false
     
     
     // MARK: UI Components
@@ -50,8 +50,7 @@ class TouristInformationView: UIView {
         let vStack = UIStackView()
         vStack.axis = .vertical
         vStack.spacing = 8
-        vStack.distribution = .fill
-        vStack.alignment = .fill
+        vStack.distribution = .equalSpacing
         return vStack
     }()
     
@@ -66,14 +65,15 @@ class TouristInformationView: UIView {
     
     // MARK: - Initialization
     
-    init(touristNumber: String) {
+    init(touristNumber: String, isHidden: Bool = true) {
         super.init(frame: .zero)
+        
+        vStackIsHidden = isHidden
         
         // Конфигурация основных параметров вида
         self.touristNumber.text = touristNumber
         backgroundColor = .white
         layer.cornerRadius = 12
-        frame.size.width = UIScreen.main.bounds.width
         
         // Добавление текстовых полей в вертикальный стек
         [firstNameTextField, lastNameTextField, dateOfBirthTextField, citizenshipTextField, passportNumberTextField, passportExpirationDateTextField].forEach { vStack.addArrangedSubview($0) }
@@ -89,10 +89,13 @@ class TouristInformationView: UIView {
         setupConstraints()
     }
     
+    override func layoutSubviews() {
+        hideShowVStack()
+    }
+    
     // MARK: Constraints
     
-    private var vStackHeightConstraint: NSLayoutConstraint!
-    private var hStackBottomConstraint: NSLayoutConstraint!
+    var constraintBottomVStack: NSLayoutConstraint!
     
     private func setupConstraints() {
         hStack.translatesAutoresizingMaskIntoConstraints = false
@@ -106,48 +109,36 @@ class TouristInformationView: UIView {
             vStack.topAnchor.constraint(equalTo: hStack.bottomAnchor, constant: 16),
             vStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             vStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            vStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
             
             visibilityToggleButton.heightAnchor.constraint(equalToConstant: 32),
             visibilityToggleButton.widthAnchor.constraint(equalToConstant: 32),
         ])
         
-        vStackHeightConstraint = vStack.heightAnchor.constraint(equalToConstant: vStackIntrinsicHeight)
-        hStackBottomConstraint = hStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
-        vStackHeightConstraint.isActive = true
+        constraintBottomVStack = vStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: vStackIsHidden ? 0 : -16)
+        constraintBottomVStack.isActive = true
     }
     
     // MARK: - User Interaction & Animation
-    
+
     @objc private func toggleButtonPressed() {
-        isVStackVisible.toggle()
+        vStackIsHidden.toggle()
         
         UIView.animate(withDuration: 0.4) {
-            self.visibilityToggleButton.imageView?.transform = self.isVStackVisible ? .identity : CGAffineTransform(rotationAngle: .pi)
-            self.updateVStackVisibility()
-            self.layoutIfNeeded()
-            self.superview?.layoutIfNeeded()
+            self.hideShowVStack()
         }
     }
     
-    // MARK: - Update Visibility
-    
-    private func updateVStackVisibility() {
-        vStackHeightConstraint.constant = isVStackVisible ? vStackIntrinsicHeight : 0
-        hStackBottomConstraint.isActive = !isVStackVisible
-        vStack.isHidden = !isVStackVisible
-        vStack.alpha = isVStackVisible ? 1.0 : 0.0
-    }
-
-    // MARK: - Helper Method
-
-    private var vStackIntrinsicHeight: CGFloat {
-        //Размер одного элемента TextField
-        let heightTextField: CGFloat = 52
-        //Количество всех TextField в vStack
-        let numberOfSubviews = vStack.arrangedSubviews.count
-        //Высота всего vStack (количество * высоту одного + Сумма промежутков между элементами)
-        return CGFloat(numberOfSubviews) * heightTextField + CGFloat(numberOfSubviews - 1) * vStack.spacing
+    private func hideShowVStack() {
+        self.visibilityToggleButton.imageView?.transform = !self.vStackIsHidden ? .identity : CGAffineTransform(rotationAngle: .pi)
+        
+        self.vStack.subviews.forEach {
+            $0.alpha = self.vStackIsHidden ? 0.0 : 1.0
+            $0.isHidden = self.vStackIsHidden
+        }
+        
+        self.constraintBottomVStack.constant = self.vStackIsHidden ? 0 : -16
+        
+        self.vStack.layoutIfNeeded()
     }
 
     
@@ -159,5 +150,6 @@ class TouristInformationView: UIView {
 #Preview {
     let view = TouristInformationView(touristNumber: "Первый турист")
     view.backgroundColor = .orange
+    //view.frame.size = .init(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
     return view
 }
