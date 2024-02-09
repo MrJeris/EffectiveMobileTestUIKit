@@ -33,7 +33,7 @@ class HotelBookingViewModel: ObservableObject {
                                                              fuelCharge: 0,
                                                              serviceCharge: 0)
     
-    init(networkingService: NetworkServiceImpl = NetworkingServiceHotelBookingSuccessMock()) {
+    init(networkingService: NetworkServiceImpl = NetworkService.shared) {
         self.networkingService = networkingService
         getHotelBooking()
     }

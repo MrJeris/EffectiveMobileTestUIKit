@@ -78,7 +78,6 @@ class BookingResultController: UIViewController {
         
         setupSubviews()
         setupConstraints()
-        
     }
     
     // MARK: - Private Methods
@@ -88,6 +87,8 @@ class BookingResultController: UIViewController {
         view.backgroundColor = .white
         
         [imageView, orderAcceptedLabel, confirmationProcessingInformationLabel, divider, button].forEach { view.addSubview($0) }
+        
+        setupButtomAction()
     }
     
     private func setupConstraints() {

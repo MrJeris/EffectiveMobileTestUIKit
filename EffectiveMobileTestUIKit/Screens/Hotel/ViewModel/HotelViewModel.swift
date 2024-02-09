@@ -17,7 +17,7 @@ class HotelViewModel: ObservableObject {
     
     @Published var hotel: HotelModel = HotelModel(id: 0, name: "", adress: "", minimalPrice: 0, priceForIt: "", rating: 0, ratingName: "", imageUrls: [], aboutTheHotel: AboutTheHotel(description: "", peculiarities: []))
     
-    init(networkingService: NetworkServiceImpl = NetworkingServiceHotelSuccessMock()) {
+    init(networkingService: NetworkServiceImpl = NetworkService.shared) {
         self.networkingService = networkingService
         fetchHotel()
     }

@@ -25,9 +25,9 @@ extension Endpoint {
     
     var path: String {
         switch self {
-        case .hotel: return "/v3/35e0d18e-2521-4f1b-a575-f0fe366f66e3"
-        case .hotelRoom: return "/v3/f9a38183-6f95-43aa-853a-9c83cbb05ecd"
-        case .hotelBooking: return "/v3/e8868481-743f-4eb2-a0d7-2bc4012275c8"
+        case .hotel: return "/v3/75000507-da9a-43f8-a618-df698ea7176d"
+        case .hotelRoom: return "/v3/157ea342-a8a3-4e00-a8e6-a87d170aa0a2"
+        case .hotelBooking: return "/v3/63866c74-d593-432c-af8e-f279d1a8d2ff"
         case .bookingResult: return ""
         }
     }

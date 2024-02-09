@@ -34,11 +34,17 @@ class TagListView: UIView {
         tagViews.removeAll()
         
         // Создаем и добавляем теги на основе переданных данных
-        for (index, tagText) in tags.enumerated() {
+        tags.forEach {
             // Проверяем, является ли текущий тег последним и должен ли он быть кнопкой
-            let isButton = index == tags.count - 1 && isLastTagButton
-            let tagView = TagView(tagText: tagText, isButton: isButton)
+            let tagView = TagView(tagText: $0)
             
+            tagViews.append(tagView)
+            addSubview(tagView)
+            tagView.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        if isLastTagButton {
+            let tagView = TagView(tagText: "Подробнее о номере", isButton: true)
             tagViews.append(tagView)
             addSubview(tagView)
             tagView.translatesAutoresizingMaskIntoConstraints = false

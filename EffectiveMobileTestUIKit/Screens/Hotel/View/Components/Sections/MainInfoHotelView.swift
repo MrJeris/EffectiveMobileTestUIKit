@@ -19,6 +19,7 @@ class MainInfoHotelView: UIView {
         label.font = UIFont.systemFont(ofSize: 22)
         label.textColor = .blackColor
         label.textAlignment = .left
+        label.numberOfLines = 2
         return label
     }()
     
@@ -92,6 +93,7 @@ class MainInfoHotelView: UIView {
             
             hotelName.topAnchor.constraint(equalTo: ratingView.bottomAnchor, constant: 8),
             hotelName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            hotelName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             
             hotelAddresButton.topAnchor.constraint(equalTo: hotelName.bottomAnchor, constant: 8),
             hotelAddresButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
